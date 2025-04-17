@@ -1,5 +1,6 @@
 package downloadmanager;
 
+import java.net.URL;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -10,6 +11,11 @@ public class DownloadManager {
     public DownloadManager(int maxParallelDownloads){
         this.executor = Executors.newFixedThreadPool(maxParallelDownloads);
         this.tasks = new ArrayList<>();
+    }
+
+    public void addDownload(URL url, String targetFile){
+        DownloadTask task = new DownloadTask(url, targetFile);
+        tasks.add(task);
     }
 
     public void startAll() {
